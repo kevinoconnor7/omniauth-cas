@@ -25,6 +25,7 @@ module OmniAuth
       option :service_validate_url, '/serviceValidate'
       option :login_url,            '/login'
       option :logout_url,           '/logout'
+      option :mail_ext, nil
       # Make all the keys configurable with some defaults set here
       option :uid_field,            'user'
       option :name_key,             'name'
@@ -40,7 +41,7 @@ module OmniAuth
       info do
         prune!({
           :name       => raw_info[ @options[:name_key].to_s ],
-          :email      => raw_info[ @options[:email_key].to_s ],
+          :email      => full_email_address,
           :first_name => raw_info[ @options[:first_name_key].to_s ],
           :last_name  => raw_info[ @options[:last_name_key].to_s ],
           :location   => raw_info[ @options[:location_key].to_s ],
@@ -61,6 +62,10 @@ module OmniAuth
         prune!({
           :ticket => @ticket
         })
+      end
+      
+      def full_email_address
+        raw_info[ @options[:email_key].to_s ] ? raw_info[ @options[:email_key].to_s ] ? uid + @options[:mail_ext]
       end
 
 
