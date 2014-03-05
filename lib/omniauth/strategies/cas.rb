@@ -65,7 +65,7 @@ module OmniAuth
       end
       
       def full_email_address
-        raw_info[ @options[:email_key].to_s ] ? raw_info[ @options[:email_key].to_s ] ? uid + @options[:mail_ext]
+        raw_info[ @options[:email_key].to_s ] ? raw_info[ @options[:email_key].to_s ] : uid + @options[:mail_ext]
       end
 
 
